@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>0xHippo Writing Up</title>
+    <title>Blonde</title>
     <link>https://0xHippo.github.io/</link>
-    <description>Recent content on 0xHippo Writing Up</description>
+    <description>Recent content on Blonde</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Tue, 03 May 2022 21:51:22 -0400</lastBuildDate><atom:link href="https://0xHippo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://0xHippo.github.io/about/</link>
+      <pubDate>Tue, 24 May 2022 20:57:57 -0400</pubDate>
+      
+      <guid>https://0xHippo.github.io/about/</guid>
+      <description>hello this is an about me page
+stuff stuff</description>
+    </item>
+    
     <item>
       <title>First</title>
       <link>https://0xHippo.github.io/posts/first/</link>
