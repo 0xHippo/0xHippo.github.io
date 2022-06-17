@@ -1,0 +1,55 @@
+figure {
+    display: block;
+    margin: auto;
+}
+
+figure img {
+    float: none;
+    margin: auto;
+}
+
+.content h1 {
+    color: rgb(133, 35, 35)
+}
+
+/* Work in progress to add a line under h1 tags
+.content h1:after {
+    content: "<br>";
+    flex: 1;
+    margin-left: 1rem;
+    height: 1px;
+    border-top: 1px solid rgb(42, 0, 0);
+}
+*/
+
+.content h2 {
+    color: rgb(88 163 214)
+}
+
+.content h3 {
+    color: rgb(255 255 13)
+}
+
+.content h4,h5,h6 {
+    text-decoration: underline;
+}
+
+/* overwrite the dumb as fuck back ticks before and after code tags */
+.prose :where(code):not(:where([class~="not-prose"] *))::before {
+    content: "";
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *))::after {
+    content: "";
+}
+
+pre,code {
+    border: 1px solid;
+    border-color: rgb(112, 104, 92);
+}
+    
+code {
+    background-color: rgb(60, 65, 68);
+    padding: 1px 5px;
+    border-radius: 3px
+}

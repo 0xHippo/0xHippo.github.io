@@ -6,33 +6,25 @@
     <description>Recent content on 0xHippo&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 08 May 2022 22:43:30 -0400</lastBuildDate><atom:link href="https://0xHippo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Aug 2020 22:43:30 -0400</lastBuildDate><atom:link href="https://0xHippo.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://0xHippo.github.io/about/</link>
       <pubDate>Tue, 24 May 2022 20:57:57 -0400</pubDate>
       
       <guid>https://0xHippo.github.io/about/</guid>
-      <description>hello this is an about me page
-stuff stuff</description>
+      <description>I&amp;rsquo;m a cloud ops engineer with a passion for security and self-hosting. I generally practice a lot of offensive security due to the ease of jumping into HackTheBox. A lot of times I can use this knowledge to help build better security practices during my time as an ops engineer.
+I hope to use this blog to keep a log of HackTheBox machines I find interesting and talking about the side projects I decide to take on.</description>
     </item>
     
     <item>
-      <title>Testpost</title>
-      <link>https://0xHippo.github.io/posts/testpost/</link>
-      <pubDate>Sun, 08 May 2022 22:43:30 -0400</pubDate>
+      <title>Blunder</title>
+      <link>https://0xHippo.github.io/posts/blunder/</link>
+      <pubDate>Tue, 25 Aug 2020 22:43:30 -0400</pubDate>
       
-      <guid>https://0xHippo.github.io/posts/testpost/</guid>
-      <description>test</description>
-    </item>
-    
-    <item>
-      <title>First</title>
-      <link>https://0xHippo.github.io/posts/first/</link>
-      <pubDate>Tue, 03 May 2022 21:51:22 -0400</pubDate>
-      
-      <guid>https://0xHippo.github.io/posts/first/</guid>
-      <description>thing</description>
+      <guid>https://0xHippo.github.io/posts/blunder/</guid>
+      <description>Blunder is a hilariously memorable box because of the simplicity behind exploiting CVE-2019-14287, a sudo version vulnerability, to gain root access. It starts out with a simple blog using the Bludit CMS. We find a version number that happens to be vulnerable to bypassing anti-brute force measures.
+ Recon Nmap We always start with our standard nmap scan. I typically immediately go to the script and version detection scan across all ports.</description>
     </item>
     
   </channel>

