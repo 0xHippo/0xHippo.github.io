@@ -1,3 +1,8 @@
+.bg-red-dark {
+    --tw-bg-opacity: 1;
+    background-color: rgb(42 0 0 / var(--tw-bg-opacity));
+  }
+
 figure {
     display: block;
     margin: auto;
